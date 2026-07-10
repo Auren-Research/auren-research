@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auren Research — Pitch Deck</title>
+  <meta name="description" content="AI infrastructure for security research. Auren Research pre-seed pitch." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="deck" class="deck" aria-live="polite">
+
+    <!-- 0 · TITLE -->
+    <section class="slide slide--title is-active" data-slide="0" aria-label="Title">
+      <div class="slide__bg slide__bg--hero" style="--hero: url('assets/hero-title.jpg')"></div>
+      <div class="slide__veil slide__veil--strong"></div>
+      <div class="slide__content slide__content--center">
+        <p class="eyebrow reveal" data-d="0">AUREN RESEARCH · PRE-SEED</p>
+        <h1 class="display display--xl reveal" data-d="1">Auren Research</h1>
+        <p class="tagline reveal" data-d="2">AI infrastructure for security research.</p>
+        <div class="founder-line reveal" data-d="3">
+          <span class="mono-soft">Francisco Antonio</span>
+          <span class="dot-sep" aria-hidden="true">·</span>
+          <span class="mono-soft">18 · self-taught · Brazil</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1 · PROBLEM -->
+    <section class="slide slide--split" data-slide="1" aria-label="The Problem">
+      <div class="slide__bg slide__bg--hero slide__bg--right" style="--hero: url('assets/hero-problem.jpg')"></div>
+      <div class="slide__veil slide__veil--left-heavy"></div>
+      <div class="glyph-field" aria-hidden="true" data-glyphs></div>
+      <div class="slide__content slide__content--left">
+        <p class="eyebrow reveal" data-d="0">001 — THE PROBLEM</p>
+        <h2 class="display reveal" data-d="1">Security research needs AI that reasons openly about exploits.</h2>
+        <p class="body reveal" data-d="2">
+          Researchers need models that can reason about malware, attack chains, and exploit analysis for authorized work.
+          General-purpose models refuse or over-filter this exact content — even when the engagement is fully legitimate.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2 · SOLUTION -->
+    <section class="slide slide--split" data-slide="2" aria-label="The Solution">
+      <div class="slide__bg slide__bg--hero slide__bg--right slide__bg--dim" style="--hero: url('assets/hero-solution.jpg')"></div>
+      <div class="slide__veil slide__veil--left-heavy"></div>
+      <div class="slide__content slide__content--left">
+        <p class="eyebrow reveal" data-d="0">002 — THE SOLUTION</p>
+        <h2 class="display reveal" data-d="1">Security-specialized models, delivered where researchers already work.</h2>
+        <p class="body reveal" data-d="2">
+          Auren trains security-specialized language models on data from <strong>Argus</strong>, our proprietary pipeline —
+          delivered as a subscription API built to plug into the agentic coding tools researchers already use daily.
+        </p>
+        <ul class="feature-list reveal" data-d="3">
+          <li>
+            <span class="feature-list__label">Claude Code</span>
+            <span class="feature-list__text">custom model backend via config</span>
+          </li>
+          <li>
+            <span class="feature-list__label">Codex CLI</span>
+            <span class="feature-list__text">one-line backend switch</span>
+          </li>
+          <li>
+            <span class="feature-list__label">Adoption</span>
+            <span class="feature-list__text">no new tooling — just a better model</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3 · HOW IT WORKS -->
+    <section class="slide slide--engine" data-slide="3" aria-label="How it works — Argus">
+      <div class="slide__bg slide__bg--hero slide__bg--wash" style="--hero: url('assets/hero-engine.jpg')"></div>
+      <div class="slide__veil slide__veil--mid"></div>
+      <div class="slide__content">
+        <p class="eyebrow reveal" data-d="0">003 — THE ENGINE</p>
+        <h2 class="display reveal" data-d="1">Argus: the data engine behind the models.</h2>
+        <div class="pipeline reveal" data-d="2">
+          <article class="pipeline__step">
+            <span class="pipeline__num">01</span>
+            <h3 class="pipeline__title">Mine</h3>
+            <p class="pipeline__body">Real CVE-fixing commits from production codebases.</p>
+          </article>
+          <article class="pipeline__step">
+            <span class="pipeline__num">02</span>
+            <h3 class="pipeline__title">Investigate</h3>
+            <p class="pipeline__body">An AI agent independently probes the vulnerable code — before the fix existed.</p>
+          </article>
+          <article class="pipeline__step">
+            <span class="pipeline__num">03</span>
+            <h3 class="pipeline__title">Inject</h3>
+            <p class="pipeline__body">Synthetic red-team bugs as negative controls, stress-testing judgment.</p>
+          </article>
+          <article class="pipeline__step">
+            <span class="pipeline__num">04</span>
+            <h3 class="pipeline__title">Grade</h3>
+            <p class="pipeline__body">Multi-signal trust: deterministic checks, evidence-faithfulness, investigative depth.</p>
+          </article>
+        </div>
+        <p class="body body--muted reveal" data-d="3">
+          Only trajectories that clear the trust system become training data.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 · PROOF PART ONE — MoC -->
+    <section class="slide slide--proof" data-slide="4" aria-label="Proof — MoC architecture">
+      <div class="slide__bg slide__bg--hero slide__bg--wash" style="--hero: url('assets/hero-moc.jpg')"></div>
+      <div class="slide__veil slide__veil--mid"></div>
+      <div class="glyph-field glyph-field--sparse" aria-hidden="true" data-glyphs></div>
+      <div class="slide__content slide__content--proof">
+        <div class="proof-copy">
+          <p class="eyebrow reveal" data-d="0">004 — PROOF, PART ONE</p>
+          <h2 class="display reveal" data-d="1">Mixture-of-Collaboration beats matched MoE.</h2>
+          <p class="body reveal" data-d="2">
+            I designed and trained <strong>MoC</strong> — a sparse Transformer where routed experts collaborate through a learned mediator.
+            In a matched <strong>498.8M-parameter</strong> comparison on <strong>9.83B tokens</strong> (single AMD MI300X), MoC beat an identical MoE baseline
+            on validation perplexity: <strong>20.70 → 20.40</strong>, with better expert load balance and zero dead experts.
+          </p>
+          <p class="mono-soft reveal" data-d="3">Built on ~$200 of compute.</p>
+        </div>
+        <aside class="proof-card reveal" data-d="2" data-chart="moc">
+          <header class="proof-card__head">
+            <span class="proof-card__label">VAL PERPLEXITY</span>
+            <span class="proof-card__hint">lower is better</span>
+          </header>
+          <div class="chart" role="img" aria-label="Validation perplexity: MoE 20.70, MoC 20.40">
+            <div class="chart__row">
+              <span class="chart__name">MoE baseline</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--muted" data-value="20.70" data-max="21.5" data-min="19.5"></div>
+              </div>
+              <span class="chart__val" data-count="20.70" data-decimals="2">0.00</span>
+            </div>
+            <div class="chart__row">
+              <span class="chart__name chart__name--accent">MoC (ours)</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--accent" data-value="20.40" data-max="21.5" data-min="19.5"></div>
+              </div>
+              <span class="chart__val chart__val--accent" data-count="20.40" data-decimals="2">0.00</span>
+            </div>
+          </div>
+          <footer class="proof-card__foot">
+            <span>498.8M params · 9.83B tokens · MI300X</span>
+          </footer>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 5 · PROOF PART TWO — Lunaris Guard -->
+    <section class="slide slide--proof" data-slide="5" aria-label="Proof — Lunaris Guard">
+      <div class="slide__bg slide__bg--hero slide__bg--wash slide__bg--center" style="--hero: url('assets/hero-lunaris.jpg')"></div>
+      <div class="slide__veil slide__veil--mid"></div>
+      <div class="glyph-field glyph-field--sparse" aria-hidden="true" data-glyphs></div>
+      <div class="slide__content slide__content--proof">
+        <div class="proof-copy">
+          <p class="eyebrow reveal" data-d="0">005 — PROOF, PART TWO</p>
+          <h2 class="display reveal" data-d="1">Lunaris Guard v3 leads production-style guardrail eval.</h2>
+          <p class="body reveal" data-d="2">
+            <strong>Lunaris Guard</strong>, our open-source multilingual security classifier, is on its third public version
+            (v3, ~307M params). In a production-style prompt-injection reliability probe, it benchmarks ahead of named
+            commercial guardrail products on <strong>F1 (0.833)</strong> and <strong>AUROC (0.888)</strong>.
+          </p>
+          <p class="mono-soft reveal" data-d="3">Open-source · MIT · auren-research/lunaris-guardv3</p>
+        </div>
+        <aside class="proof-card reveal" data-d="2" data-chart="lunaris">
+          <header class="proof-card__head">
+            <span class="proof-card__label">INJECTION F1</span>
+            <span class="proof-card__hint">higher is better</span>
+          </header>
+          <div class="chart chart--multi" role="img" aria-label="Injection F1: Lunaris 0.833, competitors lower">
+            <div class="chart__row">
+              <span class="chart__name chart__name--accent">Lunaris v3</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--accent" data-value="0.833" data-max="1" data-min="0"></div>
+              </div>
+              <span class="chart__val chart__val--accent" data-count="0.833" data-decimals="3">0.000</span>
+            </div>
+            <div class="chart__row">
+              <span class="chart__name">Wolf Defender</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--muted" data-value="0.770" data-max="1" data-min="0"></div>
+              </div>
+              <span class="chart__val" data-count="0.770" data-decimals="3">0.000</span>
+            </div>
+            <div class="chart__row">
+              <span class="chart__name">Rogue Sentinel</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--muted" data-value="0.752" data-max="1" data-min="0"></div>
+              </div>
+              <span class="chart__val" data-count="0.752" data-decimals="3">0.000</span>
+            </div>
+            <div class="chart__row">
+              <span class="chart__name">Qualifire</span>
+              <div class="chart__track">
+                <div class="chart__bar chart__bar--muted" data-value="0.735" data-max="1" data-min="0"></div>
+              </div>
+              <span class="chart__val" data-count="0.735" data-decimals="3">0.000</span>
+            </div>
+          </div>
+          <footer class="proof-card__foot">
+            <span>AUROC 0.888 · production-style 100-example probe</span>
+          </footer>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 6 · BUSINESS MODEL -->
+    <section class="slide slide--split" data-slide="6" aria-label="Business model">
+      <div class="slide__bg slide__bg--hero slide__bg--right slide__bg--dim" style="--hero: url('assets/hero-business.jpg')"></div>
+      <div class="slide__veil slide__veil--left-heavy"></div>
+      <div class="slide__content slide__content--left slide__content--wide-left">
+        <p class="eyebrow reveal" data-d="0">006 — HOW WE MAKE MONEY</p>
+        <h2 class="display reveal" data-d="1">Subscription API. Community-led distribution.</h2>
+        <div class="pricing reveal" data-d="2">
+          <article class="pricing__card">
+            <span class="pricing__tier">INDIVIDUAL</span>
+            <div class="pricing__price">
+              <span class="pricing__currency">$</span><span class="pricing__amount">99</span><span class="pricing__period">/mo</span>
+            </div>
+            <p class="pricing__desc">Solo researchers and bug bounty hunters</p>
+          </article>
+          <article class="pricing__card pricing__card--accent">
+            <span class="pricing__tier">TEAM</span>
+            <div class="pricing__price">
+              <span class="pricing__currency">$</span><span class="pricing__amount">399</span><span class="pricing__period">/mo</span>
+            </div>
+            <p class="pricing__desc">Small teams · 5 seats</p>
+          </article>
+        </div>
+        <div class="dist-row reveal" data-d="3">
+          <div class="dist-item">
+            <span class="dist-item__label">Open weights</span>
+            <span class="dist-item__text">Adoption and credibility flywheel</span>
+          </div>
+          <div class="dist-item">
+            <span class="dist-item__label">Community</span>
+            <span class="dist-item__text">HackerOne · Immunefi · Cantina</span>
+          </div>
+          <div class="dist-item">
+            <span class="dist-item__label">Track record</span>
+            <span class="dist-item__text">Founder already active in bug-bounty</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · TEAM -->
+    <section class="slide slide--split" data-slide="7" aria-label="Team">
+      <div class="slide__bg slide__bg--hero slide__bg--right slide__bg--dim" style="--hero: url('assets/hero-team.jpg')"></div>
+      <div class="slide__veil slide__veil--left-heavy"></div>
+      <div class="slide__content slide__content--left slide__content--wide-left">
+        <p class="eyebrow reveal" data-d="0">007 — WHO WE ARE</p>
+        <h2 class="display reveal" data-d="1">A small technical team shipping real systems.</h2>
+        <div class="team reveal" data-d="2">
+          <article class="team__card">
+            <div class="team__meta">
+              <span class="team__role">TECHNICAL FOUNDER</span>
+              <h3 class="team__name">Francisco Antonio</h3>
+            </div>
+            <p class="team__bio">
+              Self-taught. Designs and trains all models and architectures.
+              Funds this through real security bug-bounty work.
+            </p>
+          </article>
+          <article class="team__card">
+            <div class="team__meta">
+              <span class="team__role">CO-FOUNDER</span>
+              <h3 class="team__name">Davi</h3>
+            </div>
+            <p class="team__bio">
+              Communication and operations. Keeps the company moving while models ship.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · THE ASK -->
+    <section class="slide slide--split" data-slide="8" aria-label="The Ask">
+      <div class="slide__bg slide__bg--hero slide__bg--right slide__bg--dim" style="--hero: url('assets/hero-ask.jpg')"></div>
+      <div class="slide__veil slide__veil--left-heavy"></div>
+      <div class="slide__content slide__content--left">
+        <p class="eyebrow reveal" data-d="0">008 — THE ASK</p>
+        <h2 class="display display--lg reveal" data-d="1">Raising pre-seed to ship production infrastructure.</h2>
+        <p class="body reveal" data-d="2">
+          Capital goes to three things: building the production API, scaling Argus,
+          and validating our next-generation architecture — currently blocked purely by lack of compute.
+        </p>
+        <ul class="ask-list reveal" data-d="3">
+          <li><span class="ask-list__num">01</span><span>Production API</span></li>
+          <li><span class="ask-list__num">02</span><span>Scale Argus pipeline</span></li>
+          <li><span class="ask-list__num">03</span><span>Next-gen architecture validation</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 9 · CLOSING -->
+    <section class="slide slide--title slide--closing" data-slide="9" aria-label="Closing">
+      <div class="slide__bg slide__bg--hero" style="--hero: url('assets/hero-closing.jpg')"></div>
+      <div class="slide__veil slide__veil--strong"></div>
+      <div class="slide__content slide__content--center">
+        <p class="eyebrow reveal" data-d="0">AUREN RESEARCH</p>
+        <h2 class="display display--xl reveal" data-d="1">Thank you.</h2>
+        <p class="tagline reveal" data-d="2">AI infrastructure for security research.</p>
+        <a class="contact-link reveal" data-d="3" href="https://github.com/Auren-Research/lunaris" target="_blank" rel="noopener noreferrer">
+          github.com/Auren-Research/lunaris
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Chrome -->
+  <nav class="chrome" aria-label="Deck navigation">
+    <button type="button" class="nav-btn" id="btn-prev" aria-label="Previous slide">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
+    <button type="button" class="nav-btn" id="btn-next" aria-label="Next slide">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </nav>
+
+  <div class="progress" aria-hidden="true">
+    <div class="progress__bar" id="progress-bar"></div>
+  </div>
+
+  <div class="slide-counter mono-soft" id="counter" aria-hidden="true">01 / 10</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
