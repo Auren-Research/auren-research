@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050807">
+  <title>Auren Research — Signal Lab Preview</title>
+  <style>
+    html,body{height:100%;margin:0;background:#050807;color:#f0f6f2;font-family:Inter,system-ui,sans-serif}
+    .loader{height:100%;display:grid;place-items:center}.loader>div{text-align:center}
+    .mark{width:28px;height:28px;margin:0 auto 18px;border:1px solid rgba(130,246,176,.45);transform:rotate(45deg);display:grid;place-items:center;animation:p 1.2s ease-in-out infinite alternate}
+    .mark:after{content:"";width:5px;height:5px;border-radius:50%;background:#82f6b0;box-shadow:0 0 18px #82f6b0}
+    p{font:10px ui-monospace,monospace;letter-spacing:.14em;color:#71847a;text-transform:uppercase}
+    @keyframes p{to{box-shadow:0 0 35px rgba(130,246,176,.12)}}
+  </style>
+</head>
+<body>
+  <div class="loader"><div><div class="mark"></div><p>Loading Signal Lab preview…</p></div></div>
+  <script>
+    (async()=>{
+      const base='https://raw.githubusercontent.com/Auren-Research/auren-research/refs/heads/design/auren-signal-lab/';
+      try{
+        const [html,css,js]=await Promise.all([
+          fetch(base+'index.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('index '+r.status);return r.text()}),
+          fetch(base+'style.css',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('css '+r.status);return r.text()}),
+          fetch(base+'script.js',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('js '+r.status);return r.text()})
+        ]);
+        const cssUrl=URL.createObjectURL(new Blob([css],{type:'text/css'}));
+        const jsUrl=URL.createObjectURL(new Blob([js],{type:'text/javascript'}));
+        const page=html
+          .replace('href="style.css"','href="'+cssUrl+'"')
+          .replace('src="script.js"','src="'+jsUrl+'"');
+        document.open();document.write(page);document.close();
+      }catch(err){
+        document.body.innerHTML='<div class="loader"><div><p style="color:#ff6b70">Preview failed to load</p><p>'+String(err).replace(/[<>]/g,'')+'</p></div></div>';
+      }
+    })();
+  </script>
+</body>
+</html>
