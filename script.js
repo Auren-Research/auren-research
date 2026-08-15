@@ -1,288 +1,184 @@
 (() => {
-  "use strict";
+  'use strict';
 
-  const slides = Array.from(document.querySelectorAll(".slide"));
-  const total = slides.length;
-  const dotsEl = document.getElementById("dots");
-  const btnPrev = document.getElementById("btn-prev");
-  const btnNext = document.getElementById("btn-next");
-  const progressBar = document.getElementById("progress-bar");
-  const counter = document.getElementById("counter");
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const body = document.body;
 
-  let current = 0;
-  let locked = false;
-  const TRANSITION_MS = 560;
-  const chartAnimated = new Set();
-
-  /* ── Dots ──────────────────────────────────── */
-
-  function buildDots() {
-    dotsEl.innerHTML = "";
-    for (let i = 0; i < total; i++) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "dot" + (i === 0 ? " is-active" : "");
-      btn.setAttribute("role", "tab");
-      btn.setAttribute("aria-label", `Go to slide ${i + 1}`);
-      btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
-      btn.addEventListener("click", () => goTo(i));
-      dotsEl.appendChild(btn);
-    }
-  }
-
-  function updateChrome() {
-    const dots = dotsEl.querySelectorAll(".dot");
-    dots.forEach((d, i) => {
-      d.classList.toggle("is-active", i === current);
-      d.setAttribute("aria-selected", i === current ? "true" : "false");
-    });
-    btnPrev.disabled = current === 0;
-    btnNext.disabled = current === total - 1;
-    progressBar.style.width = `${((current + 1) / total) * 100}%`;
-    counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
-    if (window.location.hash !== `#${current + 1}`) {
-      history.replaceState(null, "", `#${current + 1}`);
-    }
-  }
-
-  /* ── Navigation ────────────────────────────── */
-
-  function goTo(index, dir) {
-    if (locked) return;
-    if (index < 0 || index >= total || index === current) return;
-
-    const direction = dir ?? (index > current ? 1 : -1);
-    const prev = current;
-    locked = true;
-
-    const leaving = slides[prev];
-    const entering = slides[index];
-
-    leaving.classList.remove("is-active");
-    leaving.classList.add("is-exit");
-
-    entering.classList.remove("is-exit");
-    entering.classList.add(direction > 0 ? "is-enter-from-next" : "is-enter-from-prev");
-    void entering.offsetWidth;
-    entering.classList.remove("is-enter-from-next", "is-enter-from-prev");
-    entering.classList.add("is-active");
-
-    current = index;
-    updateChrome();
-    onSlideEnter(entering);
-
-    window.setTimeout(() => {
-      leaving.classList.remove("is-exit");
-      locked = false;
-    }, TRANSITION_MS);
-  }
-
-  function next() {
-    goTo(current + 1, 1);
-  }
-
-  function prev() {
-    goTo(current - 1, -1);
-  }
-
-  /* ── Keyboard ──────────────────────────────── */
-
-  function onKey(e) {
-    const tag = (e.target && e.target.tagName) || "";
-    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-
-    switch (e.key) {
-      case "ArrowRight":
-      case "ArrowDown":
-      case " ":
-      case "PageDown":
-        e.preventDefault();
-        next();
-        break;
-      case "ArrowLeft":
-      case "ArrowUp":
-      case "PageUp":
-        e.preventDefault();
-        prev();
-        break;
-      case "Home":
-        e.preventDefault();
-        goTo(0, -1);
-        break;
-      case "End":
-        e.preventDefault();
-        goTo(total - 1, 1);
-        break;
-      default:
-        break;
-    }
-  }
-
-  /* ── Touch / wheel ─────────────────────────── */
-
-  let touchStartY = 0;
-  let touchStartX = 0;
-  let touchStartT = 0;
-
-  function onTouchStart(e) {
-    if (!e.touches || !e.touches[0]) return;
-    touchStartY = e.touches[0].clientY;
-    touchStartX = e.touches[0].clientX;
-    touchStartT = Date.now();
-  }
-
-  function onTouchEnd(e) {
-    if (!e.changedTouches || !e.changedTouches[0]) return;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dt = Date.now() - touchStartT;
-    if (dt > 600) return;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx < 0) next();
-      else prev();
-    } else if (Math.abs(dy) > 60) {
-      if (dy < 0) next();
-      else prev();
-    }
-  }
-
-  let wheelLock = false;
-  function onWheel(e) {
-    if (wheelLock) return;
-    const threshold = 40;
-    if (Math.abs(e.deltaY) < threshold && Math.abs(e.deltaX) < threshold) return;
-    wheelLock = true;
-    if (e.deltaY > 0 || e.deltaX > 0) next();
-    else prev();
-    window.setTimeout(() => {
-      wheelLock = false;
-    }, 700);
-  }
-
-  /* ── Glyph texture fields ──────────────────── */
-
-  const GLYPH_POOL = [
-    "0", "1", "0x", "#", "@", ">", "CVE-", "0xA3", "FF", "00",
-    "||", "//", "0x", "1", "0", "#", "@", "AF", "3E", "B2",
-    ">>", "0x", "1", "0", "CVE", "##", "0x4F", "01", "10",
-  ];
-
-  function fillGlyphFields() {
-    document.querySelectorAll("[data-glyphs]").forEach((el) => {
-      const pieces = [];
-      const count = el.classList.contains("glyph-field--sparse") ? 180 : 320;
-      for (let i = 0; i < count; i++) {
-        pieces.push(GLYPH_POOL[(Math.random() * GLYPH_POOL.length) | 0]);
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        if (entry.target.classList.contains('count')) animateCount(entry.target);
       }
-      el.textContent = pieces.join(" ");
     });
-  }
+  }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
 
-  /* ── Charts ────────────────────────────────── */
+  document.querySelectorAll('.reveal, .section-title, .system-block, .depth-card, .loop, .count').forEach((el) => revealObserver.observe(el));
 
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
+  requestAnimationFrame(() => body.classList.add('hero-ready'));
 
-  function animateCount(el, target, decimals, duration) {
-    const start = performance.now();
-
-    function frame(now) {
-      const t = Math.min(1, (now - start) / duration);
-      const v = target * easeOutCubic(t);
-      el.textContent = v.toFixed(decimals);
-      if (t < 1) requestAnimationFrame(frame);
-      else el.textContent = target.toFixed(decimals);
+  function animateCount(el) {
+    if (el.dataset.done === '1') return;
+    el.dataset.done = '1';
+    if (reduceMotion) {
+      el.textContent = el.dataset.format || el.dataset.value;
+      return;
     }
-
+    const target = Number(el.dataset.value || 0);
+    const duration = 1200;
+    const start = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 4);
+    const frame = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const value = Math.round(target * ease(t));
+      if (target >= 10000) el.textContent = `~${Math.round(value / 1000)}K`;
+      else if (el.dataset.format?.endsWith('+')) el.textContent = `${value}+`;
+      else if (el.dataset.format?.endsWith('M')) el.textContent = `${value}M`;
+      else el.textContent = String(value);
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = el.dataset.format || String(target);
+    };
     requestAnimationFrame(frame);
   }
 
-  function barWidthPercent(value, min, max) {
-    const lo = Number.isFinite(min) ? min : 0;
-    const hi = Number.isFinite(max) ? max : 1;
-    const span = hi - lo || 1;
-    // For tight ranges (perplexity), expand small deltas into a readable band
-    if (lo > 0) {
-      const normalized = (value - lo) / span;
-      return 35 + normalized * 65;
-    }
-    return Math.max(4, (value / hi) * 100);
+  const glow = document.querySelector('.cursor-glow');
+  if (glow && !reduceMotion) {
+    window.addEventListener('pointermove', (e) => {
+      glow.style.left = `${e.clientX}px`;
+      glow.style.top = `${e.clientY}px`;
+      glow.style.opacity = '1';
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
   }
 
-  function animateChart(card) {
-    const id = card.getAttribute("data-chart") || "chart";
-
-    if (chartAnimated.has(id)) {
-      card.querySelectorAll(".chart__bar").forEach((bar) => {
-        const value = parseFloat(bar.dataset.value);
-        const min = parseFloat(bar.dataset.min);
-        const max = parseFloat(bar.dataset.max);
-        bar.style.width = `${barWidthPercent(value, min, max)}%`;
-        bar.classList.add("is-animated");
-      });
-      card.querySelectorAll("[data-count]").forEach((el) => {
-        const target = parseFloat(el.dataset.count);
-        const decimals = parseInt(el.dataset.decimals || "2", 10);
-        el.textContent = target.toFixed(decimals);
-      });
-      return;
-    }
-
-    chartAnimated.add(id);
-
-    card.querySelectorAll(".chart__bar").forEach((bar, i) => {
-      const value = parseFloat(bar.dataset.value);
-      const min = parseFloat(bar.dataset.min);
-      const max = parseFloat(bar.dataset.max);
-      const width = barWidthPercent(value, min, max);
-      window.setTimeout(() => {
-        bar.style.width = `${width}%`;
-        bar.classList.add("is-animated");
-      }, 120 + i * 90);
+  document.querySelectorAll('.magnetic').forEach((el) => {
+    if (reduceMotion) return;
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.12;
+      const y = (e.clientY - r.top - r.height / 2) * 0.12;
+      el.style.transform = `translate3d(${x}px,${y}px,0)`;
     });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
 
-    card.querySelectorAll("[data-count]").forEach((el, i) => {
-      const target = parseFloat(el.dataset.count);
-      const decimals = parseInt(el.dataset.decimals || "2", 10);
-      window.setTimeout(() => {
-        animateCount(el, target, decimals, 900);
-      }, 100 + i * 90);
+  document.querySelectorAll('.tilt').forEach((card) => {
+    if (reduceMotion) return;
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${-py * 2.2}deg) rotateY(${px * 2.8}deg) translateY(-2px)`;
     });
+    card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+  });
+
+  const stages = [...document.querySelectorAll('[data-stage]')];
+  if (stages.length && !reduceMotion) {
+    let stageIndex = 0;
+    setInterval(() => {
+      stages.forEach((s) => s.classList.remove('active', 'fault'));
+      const current = stages[stageIndex % stages.length];
+      current.classList.add('active');
+      if (current.dataset.stage === 'verify' && Math.random() < 0.25) {
+        current.classList.add('fault');
+        setTimeout(() => {
+          current.classList.remove('fault');
+          document.querySelector('[data-stage="revise"]')?.classList.add('active');
+        }, 380);
+      }
+      stageIndex += 1;
+    }, 1150);
   }
 
-  function onSlideEnter(slide) {
-    const card = slide.querySelector("[data-chart]");
-    if (card) {
-      window.setTimeout(() => animateChart(card), 280);
-    }
+  const loop = document.getElementById('loop');
+  const loopNodes = loop ? [...loop.querySelectorAll('.node')] : [];
+  if (loop && loopNodes.length && !reduceMotion) {
+    let nodeIndex = 0;
+    setInterval(() => {
+      if (!loop.classList.contains('is-visible')) return;
+      loopNodes.forEach((n) => n.classList.remove('active'));
+      loopNodes[nodeIndex % loopNodes.length].classList.add('active');
+      nodeIndex += 1;
+    }, 1900);
   }
 
-  /* ── Init ──────────────────────────────────── */
+  const canvas = document.getElementById('signal-canvas');
+  const visual = document.getElementById('reasoning-visual');
+  if (canvas && visual && !reduceMotion) {
+    const ctx = canvas.getContext('2d');
+    let w = 0, h = 0, dpr = 1;
+    let raf = 0;
+    let particles = [];
 
-  function init() {
-    buildDots();
-    fillGlyphFields();
+    const resize = () => {
+      const rect = visual.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = Math.max(1, Math.round(rect.width));
+      h = Math.max(1, Math.round(rect.height));
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      particles = Array.from({ length: Math.max(18, Math.floor(w / 18)) }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: 0.12 + Math.random() * 0.28,
+        amp: 7 + Math.random() * 24,
+        phase: Math.random() * Math.PI * 2,
+        alpha: 0.08 + Math.random() * 0.22
+      }));
+    };
 
-    btnPrev.addEventListener("click", prev);
-    btnNext.addEventListener("click", next);
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("touchstart", onTouchStart, { passive: true });
-    document.addEventListener("touchend", onTouchEnd, { passive: true });
-    document.addEventListener("wheel", onWheel, { passive: true });
+    const draw = (time) => {
+      ctx.clearRect(0, 0, w, h);
+      const t = time * 0.001;
+      for (const p of particles) {
+        p.x += p.vx;
+        if (p.x > w + 8) p.x = -8;
+        const y = p.y + Math.sin(t * 0.8 + p.phase) * p.amp;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(130,246,176,${p.alpha})`;
+        ctx.arc(p.x, y, 1.1, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
-    // Deep-link: #3 (1-indexed)
-    const hash = window.location.hash.replace("#", "");
-    const fromHash = parseInt(hash, 10);
-    if (!Number.isNaN(fromHash) && fromHash >= 1 && fromHash <= total) {
-      slides[0].classList.remove("is-active");
-      current = fromHash - 1;
-      slides[current].classList.add("is-active");
-    }
+      const cy = h * 0.5;
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= w; x += 4) {
+        const y = cy + Math.sin(x * 0.022 + t * 1.4) * 13 + Math.sin(x * 0.006 - t * 0.7) * 7;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      const grad = ctx.createLinearGradient(0, 0, w, 0);
+      grad.addColorStop(0, 'rgba(80,220,197,0)');
+      grad.addColorStop(0.38, 'rgba(80,220,197,0.13)');
+      grad.addColorStop(0.68, 'rgba(130,246,176,0.18)');
+      grad.addColorStop(1, 'rgba(130,246,176,0)');
+      ctx.strokeStyle = grad;
+      ctx.stroke();
+      raf = requestAnimationFrame(draw);
+    };
 
-    updateChrome();
-    onSlideEnter(slides[current]);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !raf) raf = requestAnimationFrame(draw);
+        else if (!entry.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+      });
+    }, { threshold: 0.05 });
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    io.observe(visual);
   }
 
-  init();
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      nav.style.transform = y > lastY && y > 180 ? 'translateY(-100%)' : 'translateY(0)';
+      nav.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1)';
+      lastY = y;
+    }, { passive: true });
+  }
 })();
