@@ -1,24 +1,149 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Auren Research — Reasoning Systems for Cybersecurity</title>
-<meta name="description" content="Auren Research builds specialized reasoning models and verifiable training infrastructure for cybersecurity.">
-<meta name="theme-color" content="#050807">
-<style>
-:root{--bg:#050807;--p:#0d1511;--p2:#101b16;--t:#eef7f1;--m:#93a69a;--a:#8df8b7;--c:#54dbc7;--l:rgba(180,255,214,.13);--w:min(1160px,calc(100vw - 42px))}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--t);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}em{font-style:normal;color:var(--a)}body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 8%,rgba(84,219,199,.07),transparent 28%),radial-gradient(circle at 90% 32%,rgba(141,248,183,.06),transparent 26%)}.shell{width:var(--w);margin:auto}.nav{height:72px;position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 max(21px,calc((100vw - 1160px)/2));background:rgba(5,8,7,.84);backdrop-filter:blur(16px);border-bottom:1px solid var(--l)}.brand{font:700 12px monospace;letter-spacing:.15em;display:flex;gap:11px;align-items:center}.mark{width:20px;height:20px;border:1px solid rgba(141,248,183,.45);transform:rotate(45deg);display:grid;place-items:center}.mark:after{content:"";width:5px;height:5px;background:var(--a);border-radius:50%;box-shadow:0 0 16px var(--a)}.links{display:flex;gap:28px;font-size:12px;color:var(--m)}.links a:hover{color:var(--t)}.contact{font:10px monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--l);border-radius:99px;padding:8px 12px}.hero{min-height:760px;padding:145px 0 90px;display:grid;grid-template-columns:1.16fr .84fr;gap:64px;align-items:center}.k,.idx,.tag{font:10px monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--a)}.hero h1{font-size:clamp(56px,5.8vw,78px);line-height:.98;letter-spacing:-.065em;font-weight:500;margin:24px 0 30px;max-width:none}.hero-title-line{display:block;white-space:nowrap}.lede{font-size:18px;color:#aebfb5;max-width:610px}.actions{display:flex;gap:12px;margin-top:34px}.btn{display:inline-flex;gap:30px;align-items:center;padding:12px 15px;border-radius:10px;font-size:12px;font-weight:600;border:1px solid var(--l)}.btn.primary{background:var(--a);color:#07100b;border-color:var(--a)}.meta{display:flex;gap:18px;margin-top:38px;color:#71847a;font:10px monospace;text-transform:uppercase}.visual{height:520px;border:1px solid var(--l);border-radius:28px;position:relative;overflow:hidden;background:linear-gradient(145deg,#101914,#070b09);box-shadow:0 40px 100px rgba(0,0,0,.4)}.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(141,248,183,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(141,248,183,.055) 1px,transparent 1px);background-size:42px 42px}.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74%;padding:22px;border:1px solid rgba(141,248,183,.22);border-radius:16px;background:rgba(6,12,9,.8)}.coretop,.corefoot{display:flex;justify-content:space-between;font:9px monospace;letter-spacing:.09em;color:#71847a}.coretop b{color:var(--a)}.coremain{font:500 24px/1.45 monospace;margin:35px 0;color:#dff3e6}.trace{display:grid;gap:8px;margin-bottom:30px}.trace i{display:block;height:3px;background:linear-gradient(90deg,var(--a),rgba(84,219,199,.18));width:var(--x)}section.block{padding:116px 0;border-top:1px solid var(--l)}h2{font-size:clamp(38px,5vw,64px);line-height:1.04;letter-spacing:-.045em;font-weight:500;margin:12px 0 25px}.intro{max-width:700px;color:var(--m);font-size:17px}.thesis{display:grid;grid-template-columns:1fr 1fr;gap:100px}.thesis p{font-size:18px;color:#bfcec5}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:48px}.card{min-height:350px;border:1px solid var(--l);border-radius:20px;padding:26px;background:linear-gradient(145deg,var(--p),#080d0a)}.card:first-child{border-color:rgba(141,248,183,.35);background:linear-gradient(145deg,#101c16,#090f0c)}.cardhead{display:flex;justify-content:space-between;align-items:center}.n{font:9px monospace;color:var(--a);border:1px solid var(--l);border-radius:7px;padding:5px 8px}.tag{font-size:8px;color:#71847a}.card h3{font-size:34px;font-weight:500;letter-spacing:-.04em;margin:52px 0 14px}.card p{color:var(--m);font-size:14px}.card ul{list-style:none;margin:34px 0 0;padding:0;border-top:1px solid var(--l)}.card li{padding:8px 0;border-bottom:1px solid var(--l);font:10px monospace;color:#82968a}.metric{margin-top:36px;padding-top:17px;border-top:1px solid var(--l);display:flex;align-items:end;gap:12px}.metric strong{font:22px monospace;color:var(--a)}.metric span{font:9px monospace;color:#71847a}.proof{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--l);border-radius:20px;overflow:hidden;margin-top:44px}.proof div{padding:26px;min-height:180px;border-right:1px solid var(--l);background:#09100d}.proof div:last-child{border:0}.proof strong{display:block;font-size:36px;font-weight:500;color:var(--a)}.proof span{font:9px monospace;color:#71847a;text-transform:uppercase}.proof p{font-size:12px;color:var(--m);margin-top:28px}.revenue{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:45px}.rev{border:1px solid var(--l);border-radius:20px;padding:26px;min-height:300px;background:var(--p)}.rev b{font:9px monospace;color:var(--a)}.rev h3{font-size:27px;font-weight:500;margin:48px 0 16px}.rev p{font-size:13px;color:var(--m)}.rev strong{display:block;margin-top:38px;padding-top:15px;border-top:1px solid var(--l);font:9px monospace;text-transform:uppercase;color:#bdcdc3}.fly{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}.loop{height:460px;max-width:460px;width:100%;justify-self:end;border:1px solid var(--l);border-radius:50%;position:relative;background:radial-gradient(circle,rgba(141,248,183,.05),transparent 58%)}.center{position:absolute;inset:35%;border:1px solid rgba(141,248,183,.28);background:#102018;border-radius:50%;display:grid;place-items:center;text-align:center;font:9px monospace;color:var(--a)}.node{position:absolute;width:118px;padding:10px;border-radius:10px;border:1px solid var(--l);background:#0c1410;font-size:11px}.node b{display:block;font:8px monospace;color:var(--a)}.a{left:50%;top:3%;transform:translateX(-50%)}.b{right:-3%;top:50%;transform:translateY(-50%)}.c{left:50%;bottom:3%;transform:translateX(-50%)}.d{left:-3%;top:50%;transform:translateY(-50%)}.founder{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:50px;border:1px solid var(--l);border-radius:25px;background:linear-gradient(145deg,#0f1813,#080d0a)}.founder h3{font-size:25px;margin:0}.role{font:9px monospace;color:var(--a);text-transform:uppercase}.founder p{color:var(--m)}.social{display:flex;gap:9px;flex-wrap:wrap;margin-top:28px}.social a{font:9px monospace;padding:8px 10px;border:1px solid var(--l);border-radius:8px}.closing{text-align:center;padding:135px 0 150px;border-top:1px solid var(--l)}.closing h2{font-size:clamp(48px,6vw,80px);max-width:1000px;margin:20px auto}.closing p{max-width:610px;margin:0 auto 32px;color:var(--m);font-size:17px}.footer{height:100px;border-top:1px solid var(--l);display:flex;align-items:center;justify-content:space-between;font:9px monospace;color:#607469;text-transform:uppercase}@media(max-width:860px){:root{--w:min(100% - 30px,720px)}.links{display:none}.hero,.thesis,.fly,.founder{grid-template-columns:1fr}.hero{padding-top:120px;gap:35px}.hero h1{font-size:clamp(56px,9vw,76px)}.visual{height:420px}.cards,.revenue{grid-template-columns:1fr}.proof{grid-template-columns:1fr 1fr}.proof div:nth-child(2){border-right:0}.loop{justify-self:center}.founder{padding:30px}section.block{padding:85px 0}}@media(max-width:620px){.hero-title-line{white-space:normal}.hero h1{font-size:clamp(48px,13vw,60px);line-height:.96}}@media(max-width:520px){.actions{flex-direction:column}.proof{grid-template-columns:1fr}.proof div{border-right:0;border-bottom:1px solid var(--l)}.visual{height:350px}.core{width:86%}.coremain{font-size:18px}.loop{height:340px}.node{width:88px;font-size:9px}.footer{height:auto;padding:25px 0;gap:12px;flex-direction:column;align-items:flex-start}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Auren Research — Reasoning Systems for Cybersecurity</title>
+  <meta name="description" content="Auren Research builds specialized reasoning models and verifiable training infrastructure for cybersecurity.">
+  <meta name="theme-color" content="#050807">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="nav"><a class="brand" href="#top"><span class="mark"></span>AUREN RESEARCH</a><nav class="links"><a href="#system">System</a><a href="#proof">Proof</a><a href="#business">Business</a><a href="#about">About</a></nav><a class="contact" href="mailto:meryyllebr@gmail.com">Contact</a></header>
-<main id="top">
-<section class="hero shell"><div><p class="k">AI × CYBERSECURITY RESEARCH</p><h1><span class="hero-title-line">Reasoning systems</span><span class="hero-title-line">for <em>cybersecurity.</em></span></h1><p class="lede">Auren builds specialized models, verifiable training environments, and a high-skill security research practice as one compounding system.</p><div class="actions"><a class="btn primary" href="#system">Explore the system <span>↘</span></a><a class="btn" href="https://github.com/Auren-Research">GitHub <span>↗</span></a></div><div class="meta"><span>Brazil</span><span>Pre-seed</span><span>Research-led</span></div></div><div class="visual"><div class="grid"></div><div class="core"><div class="coretop"><span>REASONING CORE</span><b>ACTIVE</b></div><div class="coremain">observe → hypothesize<br>→ verify → revise</div><div class="trace"><i style="--x:78%"></i><i style="--x:48%"></i><i style="--x:92%"></i><i style="--x:64%"></i></div><div class="corefoot"><span>IRL</span><span>WORLDFORGE</span><span>CYBER</span></div></div></div></section>
-<section class="block"><div class="shell thesis"><div><p class="idx">01 / THESIS</p><h2>Security does not need another AI wrapper.</h2></div><div><p>It needs models that can investigate complex systems, form attack hypotheses, test them, reject false positives, and produce evidence that survives adversarial review.</p><p style="color:#7e9185">We are building the model architecture and training substrate for that job — then validating it in real security workflows.</p></div></div></section>
-<section id="system" class="block"><div class="shell"><p class="idx">02 / THE SYSTEM</p><h2>Three layers. One compounding machine.</h2><p class="intro">Each layer is useful on its own. Together they create the data, feedback and economics required to build differentiated cyber reasoning systems.</p><div class="cards"><article class="card"><div class="cardhead"><span class="n">A</span><span class="tag">MODEL R&D</span></div><h3>IRL</h3><p>Recurrent reasoning architecture designed to reuse computation instead of only scaling parameters.</p><div class="metric"><strong>−0.001519</strong><span>best ΔCE vs. Transformer<br>in 500M-token study</span></div></article><article class="card"><div class="cardhead"><span class="n">B</span><span class="tag">TRAINING SUBSTRATE</span></div><h3>WorldForge</h3><p>Deterministic procedural environments where agents learn through executable, verifiable outcomes.</p><ul><li>Replayable worlds</li><li>Symbolic state</li><li>Executable verification</li></ul></article><article class="card"><div class="cardhead"><span class="n">C</span><span class="tag">DOMAIN ENGINE</span></div><h3>Security Research</h3><p>Hands-on protocol and software security research grounds training tasks in real adversarial workflows.</p><ul><li>Threat modeling</li><li>Exploitability analysis</li><li>Reproduction & remediation</li></ul></article></div></div></section>
-<section id="proof" class="block"><div class="shell"><p class="idx">03 / PROOF OF WORK</p><h2>Research before fundraising.</h2><div class="proof"><div><strong>~14K</strong><span>WorldForge LOC</span><p>Purpose-built environment runtime, not a presentation prototype.</p></div><div><strong>120+</strong><span>tests</span><p>Determinism and verification are engineering requirements.</p></div><div><strong>500M</strong><span>training tokens</span><p>Controlled recurrent-depth study with matched baselines.</p></div><div><strong>T6–T8</strong><span>useful depth regime</span><p>Additional recurrent compute helped until excess depth degraded quality.</p></div></div></div></section>
-<section id="business" class="block"><div class="shell"><p class="idx">04 / BUSINESS MODEL</p><h2>Services → software → infrastructure.</h2><p class="intro">We enter through high-value security work, productize the capability, then expose the training infrastructure behind it.</p><div class="revenue"><article class="rev"><b>01 / NOW</b><h3>Private Security Research</h3><p>High-skill audits and continuous security engagements with a deliberately small research team.</p><strong>Project fees + retainers</strong></article><article class="rev"><b>02 / PRODUCT</b><h3>Auren Cyber Models</h3><p>Specialized reasoning models for investigation, attack-path analysis, reproduction and remediation.</p><strong>API + enterprise deployment</strong></article><article class="rev"><b>03 / PLATFORM</b><h3>WorldForge</h3><p>Training and evaluation infrastructure for organizations building or adapting their own cybersecurity models.</p><strong>Usage + licensing + custom training</strong></article></div></div></section>
-<section class="block"><div class="shell fly"><div><p class="idx">05 / DEFENSIBILITY</p><h2>Every engagement improves the machine.</h2><p class="intro">Real research produces domain knowledge and failure modes. WorldForge turns them into verifiable environments. Better environments train better models. Better models increase research leverage.</p></div><div class="loop"><div class="center">AUREN<br>COMPOUNDING<br>LOOP</div><div class="node a"><b>01</b>Security engagements</div><div class="node b"><b>02</b>Domain knowledge</div><div class="node c"><b>03</b>WorldForge</div><div class="node d"><b>04</b>Better models</div></div></div></section>
-<section id="about" class="block"><div class="shell founder"><div><p class="idx">06 / FOUNDER</p><h2>Built under constraint.<br>Designed to scale.</h2></div><div><h3>Francisco Antonio</h3><p class="role">Founder · AI systems & security research · Brazil</p><p>Auren started as independent architecture research and evolved through hands-on cybersecurity work into a focused company thesis: build reasoning systems that perform security research with evidence, not just plausible findings.</p><div class="social"><a href="https://github.com/MeryylleA">GitHub ↗</a><a href="https://huggingface.co/meryyllebr543">Hugging Face ↗</a><a href="https://www.linkedin.com/in/francisco-antonio-0434aa284/">LinkedIn ↗</a></div></div></div></section>
-<section class="closing shell"><p class="k">PRE-SEED</p><h2>Scale the research.<br><em>Build the security model company.</em></h2><p>We are looking for partners who understand that durable AI security capability is built below the wrapper layer.</p><a class="btn primary" href="mailto:meryyllebr@gmail.com">Start a conversation <span>↗</span></a></section>
-</main><footer class="footer shell"><span>© 2026 Auren Research</span><span>Reasoning systems for cybersecurity.</span><a href="#top">Back to top ↑</a></footer>
-</body></html>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Auren Research home"><span class="mark"></span><span>AUREN RESEARCH</span></a>
+    <nav class="links" aria-label="Primary navigation">
+      <a href="#system">System</a><a href="#proof">Proof</a><a href="#business">Business</a><a href="#about">About</a>
+    </nav>
+    <a class="contact" href="mailto:meryyllebr@gmail.com">Contact <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">AI × CYBERSECURITY RESEARCH</p>
+        <h1 class="hero-title" aria-label="Reasoning systems for cybersecurity.">
+          <span class="mask"><span>Reasoning systems</span></span>
+          <span class="mask"><span>for <em>cybersecurity.</em></span></span>
+        </h1>
+        <p class="lede reveal">Auren builds specialized models, verifiable training environments, and a high-skill security research practice as one compounding system.</p>
+        <div class="actions reveal">
+          <a class="btn primary magnetic" href="#system">Explore the system <span>↘</span></a>
+          <a class="btn magnetic" href="https://github.com/Auren-Research">GitHub <span>↗</span></a>
+        </div>
+        <div class="meta reveal"><span>Brazil</span><span>Pre-seed</span><span>Research-led</span></div>
+      </div>
+
+      <div class="visual reveal" id="reasoning-visual">
+        <canvas id="signal-canvas" aria-hidden="true"></canvas>
+        <div class="visual-grid" aria-hidden="true"></div>
+        <div class="visual-scan" aria-hidden="true"></div>
+        <div class="core-shell">
+          <div class="core-top"><span>REASONING CORE</span><b><i></i>ACTIVE</b></div>
+          <div class="core-main" aria-label="observe, hypothesize, verify, revise">
+            <span data-stage="observe">observe</span><b>→</b><span data-stage="hypothesize">hypothesize</span><br>
+            <span data-stage="verify">verify</span><b>→</b><span data-stage="revise">revise</span>
+          </div>
+          <div class="trace" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="core-foot"><span>IRL</span><span>WORLDFORGE</span><span>CYBER</span></div>
+        </div>
+        <div class="visual-label label-a">HYPOTHESIS / 071</div>
+        <div class="visual-label label-b">VERIFICATION / EXEC</div>
+      </div>
+    </section>
+
+    <section class="block thesis-block">
+      <div class="shell thesis">
+        <div><p class="idx reveal">01 / THESIS</p><h2 class="section-title"><span class="mask"><span>Security does not</span></span><span class="mask"><span>need another AI</span></span><span class="mask"><span>wrapper.</span></span></h2></div>
+        <div class="thesis-copy reveal"><p>It needs models that can investigate complex systems, form attack hypotheses, test them, reject false positives, and produce evidence that survives adversarial review.</p><p>We are building the model architecture and training substrate for that job — then validating it in real security workflows.</p></div>
+      </div>
+    </section>
+
+    <section id="system" class="block system-block">
+      <div class="shell">
+        <p class="idx reveal">02 / THE SYSTEM</p>
+        <h2 class="section-title"><span class="mask"><span>Three layers.</span></span> <span class="mask"><span>One compounding machine.</span></span></h2>
+        <p class="intro reveal">Each layer is useful on its own. Together they create the data, feedback and economics required to build differentiated cyber reasoning systems.</p>
+
+        <div class="system-rail" aria-hidden="true"><span class="rail-line"></span><span class="rail-pulse"></span></div>
+        <div class="cards">
+          <article class="card tilt reveal" data-seq="A"><div class="card-head"><span class="n">A</span><span class="tag">MODEL R&amp;D</span></div><h3>IRL</h3><p>Recurrent reasoning architecture designed to reuse computation instead of only scaling parameters.</p><div class="metric"><strong>−0.001519</strong><span>best ΔCE vs. Transformer<br>in 500M-token study</span></div></article>
+          <article class="card tilt reveal" data-seq="B"><div class="card-head"><span class="n">B</span><span class="tag">TRAINING SUBSTRATE</span></div><h3>WorldForge</h3><p>Deterministic procedural environments where agents learn through executable, verifiable outcomes.</p><ul><li>Replayable worlds</li><li>Symbolic state</li><li>Executable verification</li></ul></article>
+          <article class="card tilt reveal" data-seq="C"><div class="card-head"><span class="n">C</span><span class="tag">DOMAIN ENGINE</span></div><h3>Security Research</h3><p>Hands-on protocol and software security research grounds training tasks in real adversarial workflows.</p><ul><li>Threat modeling</li><li>Exploitability analysis</li><li>Reproduction &amp; remediation</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="block proof-block">
+      <div class="shell">
+        <p class="idx reveal">03 / PROOF OF WORK</p>
+        <h2 class="section-title"><span class="mask"><span>Research before fundraising.</span></span></h2>
+        <div class="proof reveal">
+          <div><strong class="count" data-format="~14K" data-value="14000">0</strong><span>WorldForge LOC</span><p>Purpose-built environment runtime, not a presentation prototype.</p></div>
+          <div><strong class="count" data-format="120+" data-value="120">0</strong><span>tests</span><p>Determinism and verification are engineering requirements.</p></div>
+          <div><strong class="count" data-format="500M" data-value="500">0</strong><span>training tokens</span><p>Controlled recurrent-depth study with matched baselines.</p></div>
+          <div><strong>T6–T8</strong><span>useful depth regime</span><p>Additional recurrent compute helped until excess depth degraded quality.</p></div>
+        </div>
+        <div class="depth-card reveal" aria-label="Recurrent depth study visualization">
+          <div class="depth-head"><span>RECURRENT DEPTH STUDY</span><span>ΔCE VS TRANSFORMER</span></div>
+          <div class="depth-chart">
+            <div class="depth-row"><span>T2</span><i style="--v:28%"></i><small>exploration</small></div>
+            <div class="depth-row best"><span>T6</span><i style="--v:86%"></i><small>best regime</small></div>
+            <div class="depth-row best"><span>T8</span><i style="--v:80%"></i><small>useful regime</small></div>
+            <div class="depth-row"><span>T12</span><i style="--v:56%"></i><small>diminishing</small></div>
+            <div class="depth-row fault"><span>T16+</span><i style="--v:18%"></i><small>quality degradation</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" class="block business-block">
+      <div class="shell">
+        <p class="idx reveal">04 / BUSINESS MODEL</p>
+        <h2 class="section-title business-title"><span class="mask"><span>Services</span></span><b>→</b><span class="mask"><span>software</span></span><b>→</b><span class="mask"><span>infrastructure.</span></span></h2>
+        <p class="intro reveal">We enter through high-value security work, productize the capability, then expose the training infrastructure behind it.</p>
+        <div class="revenue">
+          <article class="rev tilt reveal"><b>01 / NOW</b><h3>Private Security Research</h3><p>High-skill audits and continuous security engagements with a deliberately small research team.</p><strong>Project fees + retainers</strong></article>
+          <article class="rev tilt reveal"><b>02 / PRODUCT</b><h3>Auren Cyber Models</h3><p>Specialized reasoning models for investigation, attack-path analysis, reproduction and remediation.</p><strong>API + enterprise deployment</strong></article>
+          <article class="rev tilt reveal"><b>03 / PLATFORM</b><h3>WorldForge</h3><p>Training and evaluation infrastructure for organizations building or adapting their own cybersecurity models.</p><strong>Usage + licensing + custom training</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block defensibility-block">
+      <div class="shell fly">
+        <div><p class="idx reveal">05 / DEFENSIBILITY</p><h2 class="section-title"><span class="mask"><span>Every engagement</span></span><span class="mask"><span>improves the machine.</span></span></h2><p class="intro reveal">Real research produces domain knowledge and failure modes. WorldForge turns them into verifiable environments. Better environments train better models. Better models increase research leverage.</p></div>
+        <div class="loop reveal" id="loop">
+          <svg viewBox="0 0 460 460" aria-hidden="true"><circle class="loop-track" cx="230" cy="230" r="194"></circle><circle class="loop-progress" cx="230" cy="230" r="194"></circle></svg>
+          <div class="center">AUREN<br>COMPOUNDING<br>LOOP</div>
+          <div class="node a"><b>01</b><span>Security engagements</span></div>
+          <div class="node b"><b>02</b><span>Domain knowledge</span></div>
+          <div class="node c"><b>03</b><span>WorldForge</span></div>
+          <div class="node d"><b>04</b><span>Better models</span></div>
+          <div class="orbit-signal" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="block about-block">
+      <div class="shell founder reveal">
+        <div><p class="idx">06 / FOUNDER</p><h2>Built under constraint.<br>Designed to scale.</h2></div>
+        <div><h3>Francisco Antonio</h3><p class="role">Founder · AI systems &amp; security research · Brazil</p><p>Auren started as independent architecture research and evolved through hands-on cybersecurity work into a focused company thesis: build reasoning systems that perform security research with evidence, not just plausible findings.</p><div class="social"><a class="magnetic" href="https://github.com/MeryylleA">GitHub ↗</a><a class="magnetic" href="https://huggingface.co/meryyllebr543">Hugging Face ↗</a><a class="magnetic" href="https://www.linkedin.com/in/francisco-antonio-0434aa284/">LinkedIn ↗</a></div></div>
+      </div>
+    </section>
+
+    <section class="closing shell">
+      <div class="closing-field" aria-hidden="true"></div>
+      <p class="eyebrow reveal">PRE-SEED</p>
+      <h2 class="section-title"><span class="mask"><span>Scale the research.</span></span><span class="mask"><span><em>Build the security model company.</em></span></span></h2>
+      <p class="reveal">We are looking for partners who understand that durable AI security capability is built below the wrapper layer.</p>
+      <a class="btn primary magnetic reveal" href="mailto:meryyllebr@gmail.com">Start a conversation <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="footer shell"><span>© 2026 Auren Research</span><span>Reasoning systems for cybersecurity.</span><a href="#top">Back to top ↑</a></footer>
+  <script src="script.js" defer></script>
+</body>
+</html>
